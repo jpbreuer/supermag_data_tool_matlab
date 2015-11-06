@@ -1,0 +1,13 @@
+clear all
+
+file = './supermag-stations.csv';
+% data = textscan('supermag-stations.csv');
+data = csvimport(file);
+stationcode = data(:,1);        %IAGA
+geolon = data(:,2);             %GLON
+geolat = data(:,3);             %GLAT
+maglon = data(:,4);             %MLON
+maglat = data(:,5);             %MLAT
+station_name = data(:,6);       %STATIONNAME
+operator_number = data(:,7);    %OPERATORNUM
+operators = data(:,8);          %OPERATORS
