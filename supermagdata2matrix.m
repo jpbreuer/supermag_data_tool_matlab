@@ -1,4 +1,4 @@
-function [Date_UTC, jd2000, cellNos, MLT, MLAT, IGRF_DECL, SZA, N, E, Z] = data2matrix(filepath)
+function [Date_UTC, jd2000, cellNos, MLT, MLAT, IGRF_DECL, SZA, N, E, Z] = supermagdata2matrix(filepath)
 % Import Data
 olddata = readtable(filepath);
 olddata = sortrows(olddata,2);
