@@ -3,7 +3,7 @@ clear all
 close all
 
 % Specify dataset
-filepath = './supermag_data/csv/2010-May-03.csv';
+filepath = './supermag_data/csv/2005-Jan-21_unsorted.csv';
 
 % Load data
 [Date_UTC, jd2000, IAGA, MLT, MLAT, IGRF_DECL, SZA, N, E, Z] = data2matrix(filepath);

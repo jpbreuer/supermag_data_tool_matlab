@@ -1,6 +1,7 @@
 function [Date_UTC, jd2000, cellNos, MLT, MLAT, IGRF_DECL, SZA, N, E, Z] = data2matrix(filepath)
 % Import Data
 olddata = readtable(filepath);
+olddata = sortrows(olddata,2);
 
 % Delete Incomplete Station Data
 min_day = 60*24;
