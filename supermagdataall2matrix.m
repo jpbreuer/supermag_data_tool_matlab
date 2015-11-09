@@ -26,6 +26,14 @@ N = table2array(N);
 E = table2array(E);
 Z = table2array(Z);
 
+MLT(MLT == 999999) = NaN;
+MLAT(MLAT == 999999) = NaN;
+IGRF_DECL(IGRF_DECL == 999999) = NaN;
+SZA(SZA == 999999) = NaN;
+N(N == 999999) = NaN;
+E(E == 999999) = NaN;
+Z(Z == 999999) = NaN;
+
 [IAGA,~,index] = unique(IAGA);
 MLT = accumarray(index(:),MLT,[],@(x) {x});
 MLAT = accumarray(index(:),MLAT,[],@(x) {x});
