@@ -1,4 +1,4 @@
-function d = datetime(t);
+function d = datetime_JP(t);
 
 % DATETIME  returns correct DateTime from Matlab's DATENUM
 %

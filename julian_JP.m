@@ -1,4 +1,4 @@
-function c = julian(yy,mm,dd,hh,m,s)
+function c = julian_JP(yy,mm,dd,hh,m,s)
 
 % JULIAN  Converts Gregorian calendar dates to Julian day number
 %

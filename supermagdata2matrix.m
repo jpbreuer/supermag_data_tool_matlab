@@ -48,8 +48,8 @@ Date_UTC = table2array(Date_UTC);
 for d = 1:min_day
     time(d) = Date_UTC(d);
 end
-timevec = datetime(time);
-jd2000 = julian(timevec);
+timevec = datetime_JP(time);
+jd2000 = julian_JP(timevec);
 
 % Import other Data
 MLT = data(:,3);
