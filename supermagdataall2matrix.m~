@@ -1,7 +1,7 @@
 function [jd2000exact, IAGA, MLT, MLAT, IGRF_DECL, SZA, N, E, Z] = supermagdataall2matrix(filepath)
-% clear all
+clear all
 % Import Data
-% filepath = './supermag_data/csv/2010-April-06.csv';
+filepath = './supermag_data/csv/2010-April-06.csv';
 
 olddata = readtable(filepath);
 olddata = sortrows(olddata,2);
@@ -51,8 +51,7 @@ Z = accumarray(index(:),Z,[],@(x) {x});
 
 datevec = datetime_JP(Date_UTC);
 
-%for i = 1:length(datevec)
-jd2000exact = jd2000_new(datevec(:,1),datevec(:,2),datevec(:,3),datevec(:,4));
+jd2000exact = jd2000_new(datevec(1),datevec(2),datevec(3),datevec(4));
 
 mapObj = containers.Map(Date_UTC,jd2000exact);
 
