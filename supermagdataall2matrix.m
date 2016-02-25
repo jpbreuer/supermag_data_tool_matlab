@@ -1,7 +1,7 @@
-function [jd2000exact, IAGA, MLT, MLAT, IGRF_DECL, SZA, N, E, Z] = supermagdataall2matrix(filepath)
-% clear all
+% function [jd2000exact, IAGA, MLT, MLAT, IGRF_DECL, SZA, N, E, Z] = supermagdataall2matrix(filepath)
+clear all
 % Import Data
-% filepath = './supermag_data/csv/2010-April-06.csv';
+filepath = './supermag_data/csv/2010-April-06.csv';
 
 olddata = readtable(filepath);
 olddata = sortrows(olddata,2);
@@ -143,7 +143,7 @@ SZA = reshape(SZA,min_day,length(IAGA));
 N = reshape(N,min_day,length(IAGA));
 E = reshape(E,min_day,length(IAGA));
 Z = reshape(Z,min_day,length(IAGA));
-end
+% end
 % MLT = accumarray(index(:),MLT,[],@(x) {x});
 % MLAT = accumarray(index(:),MLAT,[],@(x) {x});
 % IGRF_DECL = accumarray(index(:),IGRF_DECL,[],@(x) {x});
