@@ -1,7 +1,7 @@
-function [jd2000exact, IAGA, MLT, MLAT, IGRF_DECL, SZA, N, E, Z] = supermagdataall2matrix(filepath)
+function [jd2000, IAGA, MLT, MLAT, IGRF_DECL, SZA, N, E, Z] = supermagdataall2matrix(filepath)
 % clear all
 % Import Data
-% filepath = './supermag_data/csv/2010-April-06.csv';
+% filepath = './supermag_data/csv/2014-Jan-01.csv';
 
 olddata = readtable(filepath);
 olddata = sortrows(olddata,2);
@@ -36,6 +36,7 @@ SZA(SZA == 999999) = NaN;
 N(N == 999999) = NaN;
 E(E == 999999) = NaN;
 Z(Z == 999999) = NaN;
+%plot(1:1440,N(10081:11520));hold on;plot(1:1440,E(10081:11520));plot(1:1440,Z(10081:11520));
 
 [IAGA,~,index] = unique(IAGA);
 MLT = accumarray(index(:),MLT,[],@(x) {x});
@@ -50,9 +51,9 @@ Z = accumarray(index(:),Z,[],@(x) {x});
 [Date_UTC,~,indexUTC] = unique(Date_UTC);
 
 datevec = datetime_JP(Date_UTC);
+decimal_min = datevec(:,5)./60;
 
-%for i = 1:length(datevec)
-jd2000exact = jd2000_new(datevec(:,1),datevec(:,2),datevec(:,3),datevec(:,4));
+jd2000exact = jd2000_new(datevec(:,1),datevec(:,2),datevec(:,3),(datevec(:,4)+decimal_min));
 
 mapObj = containers.Map(Date_UTC,jd2000exact);
 
@@ -88,12 +89,13 @@ nnew = N;
 enew = E;
 znew = Z;
 
-    
+
 for ii = 1:length(tdiffindex)
 %     jd2000no = [jd2000no jd2000{tdiffindex(ii),1}'];
     [tf, loc] = ismember(jd2000{tdiffindex(ii),1}, jd2000exact);
      jd{tdiffindex(ii),1} = nan(size(jd2000exact));
     
+% define empty nan arrays
 %     datenew{tdiffindex(ii),1} = nan(size(jd2000exact));
 %     iaganew{tdiffindex(ii),1} = nan(size(jd2000exact));
     mltnew{tdiffindex(ii),1} = nan(size(jd2000exact));
@@ -104,7 +106,7 @@ for ii = 1:length(tdiffindex)
     enew{tdiffindex(ii),1} = nan(size(jd2000exact));
     znew{tdiffindex(ii),1} = nan(size(jd2000exact));
     
-    
+% replace values in correct location leaving nans
      jd{tdiffindex(ii),1}(loc) = jd2000{tdiffindex(ii),1};
 %     datenew{tdiffindex(ii),1}(loc) = Date_UTC{tdiffindex(ii),1};
 %     iaganew{tdiffindex(ii),1}(loc) = IAGA{tdiffindex(ii),1};
@@ -115,7 +117,6 @@ for ii = 1:length(tdiffindex)
     nnew{tdiffindex(ii),1}(loc) = N{tdiffindex(ii),1};
     enew{tdiffindex(ii),1}(loc) = E{tdiffindex(ii),1};
     znew{tdiffindex(ii),1}(loc) = Z{tdiffindex(ii),1};
-
 end
 
 jd2000 = cell2mat(jd);
@@ -137,7 +138,7 @@ Z(Z == 999999) = NaN;
 % 
 [IAGA,~,index] = unique(IAGA);
 
-jd2000 = reshape(jd2000,min_day,length(IAGA));
+jd2000 = reshape(jd2000,min_day,length(IAGA));jd2000 = jd2000(:,1);
 MLT = reshape(MLT,min_day,length(IAGA));
 MLAT = reshape(MLAT,min_day,length(IAGA));
 IGRF_DECL = reshape(IGRF_DECL,min_day,length(IAGA));
