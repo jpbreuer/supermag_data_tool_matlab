@@ -146,6 +146,9 @@ SZA = reshape(SZA,min_day,length(IAGA));
 N = reshape(N,min_day,length(IAGA));
 E = reshape(E,min_day,length(IAGA));
 Z = reshape(Z,min_day,length(IAGA));
+% 
+% MLT_dat = dataset(MLT);MLT_dat.Properties.VarNames = IAGA;
+
 end
 
 
