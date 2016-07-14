@@ -1,8 +1,7 @@
 function supermag_combine_data(startTime,endTime,stations,path_to_files,path_to_output_files)
 
-STATIONS = sort(strsplit(stations,','));%{'DOU','NUR','SOD','NGK','WNG','FUR','BFO','VAL','ESK','HAD','LER','CLF','MAB','ABG','FRD','PG3','PG1','PG2'}
-% Specify dataset
-% filepath = './supermag_data/csv/2014-Jan-01.csv';
+STATIONS = sort(strsplit(stations,','));
+
 list_temp = dir(path_to_files);% '*.csv']);
 list = {list_temp.name}';
 list{1} = {};list{2} = {};list{3} = {};list = list(~cellfun(@isempty,list));
