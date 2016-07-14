@@ -107,15 +107,28 @@ if ~exist(sprintf([path_to_output_files '%s_%s_supermag_MLT.txt'],startTime(1:10
     
     MLT_new = MLT_matrix(:,columnIndex);
     MLT_new(find(MLT_new == 0)) = NaN;
-    % Save data
     
+    MLT_final = horzcat(jd2000_vec,MLT_new);
+    
+    % Save data
     filename_out = sprintf([path_to_output_files '%s_%s_supermag_MLT.txt'],startTime(1:10),endTime(1:10));
     fid_out = fopen(filename_out,'w');
     
-    fprintf(fid_out,'%s %s %s %s %s %s %s %s %s %s %s %s %s %s %s %s %s %s %s \n','Time (jd2000)',IAGA_all{columnIndex(1)},IAGA_all{columnIndex(2)},IAGA_all{columnIndex(3)},IAGA_all{columnIndex(4)},IAGA_all{columnIndex(5)},IAGA_all{columnIndex(6)},IAGA_all{columnIndex(7)},IAGA_all{columnIndex(8)},IAGA_all{columnIndex(9)},IAGA_all{columnIndex(10)},IAGA_all{columnIndex(11)},IAGA_all{columnIndex(12)},IAGA_all{columnIndex(13)},IAGA_all{columnIndex(14)},IAGA_all{columnIndex(15)},IAGA_all{columnIndex(16)},IAGA_all{columnIndex(17)},IAGA_all{columnIndex(18)});
-    for kk = 1:length(MLT_new)
-        fprintf(fid_out,'%10.5f %10.5f %10.5f %10.5f %10.5f %10.5f %10.5f %10.5f %10.5f %10.5f %10.5f %10.5f %10.5f %10.5f %10.5f %10.5f %10.5f %10.5f %10.5f \n',jd2000_vec(kk),MLT_new(kk,1),MLT_new(kk,2),MLT_new(kk,3),MLT_new(kk,4),MLT_new(kk,5),MLT_new(kk,6),MLT_new(kk,7),MLT_new(kk,8),MLT_new(kk,9),MLT_new(kk,10),MLT_new(kk,11),MLT_new(kk,12),MLT_new(kk,13),MLT_new(kk,14),MLT_new(kk,15),MLT_new(kk,16),MLT_new(kk,17),MLT_new(kk,18));
+    fprintf(fid_out,'%s' ,'Time (jd2000) ');
+    for mm = 1:length(columnIndex)
+        fprintf(fid_out,'%s ',IAGA_all{columnIndex(mm)});%,IAGA_all{columnIndex(2)},IAGA_all{columnIndex(3)},IAGA_all{columnIndex(4)},IAGA_all{columnIndex(5)},IAGA_all{columnIndex(6)},IAGA_all{columnIndex(7)},IAGA_all{columnIndex(8)},IAGA_all{columnIndex(9)},IAGA_all{columnIndex(10)},IAGA_all{columnIndex(11)},IAGA_all{columnIndex(12)},IAGA_all{columnIndex(13)},IAGA_all{columnIndex(14)},IAGA_all{columnIndex(15)},IAGA_all{columnIndex(16)},IAGA_all{columnIndex(17)},IAGA_all{columnIndex(18)});
     end
+    fprintf(fid_out,'\n');
+    [rows cols] = size(MLT_final);
+    x = repmat('%10.5f\t',1,(cols-1));
+    fprintf(fid_out,[x,'%10.5f\n'],MLT_final');
+
+%     for mm = 1:length(columnIndex)
+%         for kk = 1:length(MLT_new)
+%             fprintf(fid_out,'%s ',jd2000_vec(kk),MLT_new(kk,mm));%,MLT_new(kk,2),MLT_new(kk,3),MLT_new(kk,4),MLT_new(kk,5),MLT_new(kk,6),MLT_new(kk,7),MLT_new(kk,8),MLT_new(kk,9),MLT_new(kk,10),MLT_new(kk,11),MLT_new(kk,12),MLT_new(kk,13),MLT_new(kk,14),MLT_new(kk,15),MLT_new(kk,16),MLT_new(kk,17),MLT_new(kk,18));
+%         end
+%     end
+    
     fclose(fid_out);
     
     clear('MLT_matrix','MLT_new');
@@ -149,15 +162,23 @@ if ~exist(sprintf([path_to_output_files '%s_%s_supermag_MLAT.txt'],startTime(1:1
     
     MLAT_new = MLAT_matrix(:,columnIndex);
     MLAT_new(find(MLAT_new == 0)) = NaN;
+    
+    MLAT_final = horzcat(jd2000_vec,MLAT_new);
     % Save data
     
     filename_out = sprintf([path_to_output_files '%s_%s_supermag_MLAT.txt'],startTime(1:10),endTime(1:10));
     fid_out = fopen(filename_out,'w');
     
-    fprintf(fid_out,'%s %s %s %s %s %s %s %s %s %s %s %s %s %s %s %s %s %s %s \n','Time (jd2000)',IAGA_all{columnIndex(1)},IAGA_all{columnIndex(2)},IAGA_all{columnIndex(3)},IAGA_all{columnIndex(4)},IAGA_all{columnIndex(5)},IAGA_all{columnIndex(6)},IAGA_all{columnIndex(7)},IAGA_all{columnIndex(8)},IAGA_all{columnIndex(9)},IAGA_all{columnIndex(10)},IAGA_all{columnIndex(11)},IAGA_all{columnIndex(12)},IAGA_all{columnIndex(13)},IAGA_all{columnIndex(14)},IAGA_all{columnIndex(15)},IAGA_all{columnIndex(16)},IAGA_all{columnIndex(17)},IAGA_all{columnIndex(18)});
-    for kk = 1:length(MLAT_new)
-        fprintf(fid_out,'%10.5f %10.5f %10.5f %10.5f %10.5f %10.5f %10.5f %10.5f %10.5f %10.5f %10.5f %10.5f %10.5f %10.5f %10.5f %10.5f %10.5f %10.5f %10.5f \n',jd2000_vec(kk),MLAT_new(kk,1),MLAT_new(kk,2),MLAT_new(kk,3),MLAT_new(kk,4),MLAT_new(kk,5),MLAT_new(kk,6),MLAT_new(kk,7),MLAT_new(kk,8),MLAT_new(kk,9),MLAT_new(kk,10),MLAT_new(kk,11),MLAT_new(kk,12),MLAT_new(kk,13),MLAT_new(kk,14),MLAT_new(kk,15),MLAT_new(kk,16),MLAT_new(kk,17),MLAT_new(kk,18));
+     fprintf(fid_out,'%s' ,'Time (jd2000) ');
+    for mm = 1:length(columnIndex)
+        fprintf(fid_out,'%s ',IAGA_all{columnIndex(mm)});%,IAGA_all{columnIndex(2)},IAGA_all{columnIndex(3)},IAGA_all{columnIndex(4)},IAGA_all{columnIndex(5)},IAGA_all{columnIndex(6)},IAGA_all{columnIndex(7)},IAGA_all{columnIndex(8)},IAGA_all{columnIndex(9)},IAGA_all{columnIndex(10)},IAGA_all{columnIndex(11)},IAGA_all{columnIndex(12)},IAGA_all{columnIndex(13)},IAGA_all{columnIndex(14)},IAGA_all{columnIndex(15)},IAGA_all{columnIndex(16)},IAGA_all{columnIndex(17)},IAGA_all{columnIndex(18)});
     end
+    
+    fprintf(fid_out,'\n');
+    [rows cols] = size(MLAT_final);
+    x = repmat('%10.5f\t',1,(cols-1));
+    fprintf(fid_out,[x,'%10.5f\n'],MLAT_final');
+
     fclose(fid_out);
     
     clear('MLAT_matrix','MLAT_new');
@@ -189,15 +210,22 @@ if ~exist(sprintf([path_to_output_files '%s_%s_supermag_IGRF_DECL.txt'],startTim
     
     IGRF_DECL_new = IGRF_DECL_matrix(:,columnIndex);
     IGRF_DECL_new(find(IGRF_DECL_new == 0)) = NaN;
+    
+    IGRF_DECL_final = horzcat(jd2000_vec,IGRF_DECL_new);
     % Save data
     
     filename_out = sprintf([path_to_output_files '%s_%s_supermag_IGRF_DECL.txt'],startTime(1:10),endTime(1:10));
     fid_out = fopen(filename_out,'w');
     
-    fprintf(fid_out,'%s %s %s %s %s %s %s %s %s %s %s %s %s %s %s %s %s %s %s \n','Time (jd2000)',IAGA_all{columnIndex(1)},IAGA_all{columnIndex(2)},IAGA_all{columnIndex(3)},IAGA_all{columnIndex(4)},IAGA_all{columnIndex(5)},IAGA_all{columnIndex(6)},IAGA_all{columnIndex(7)},IAGA_all{columnIndex(8)},IAGA_all{columnIndex(9)},IAGA_all{columnIndex(10)},IAGA_all{columnIndex(11)},IAGA_all{columnIndex(12)},IAGA_all{columnIndex(13)},IAGA_all{columnIndex(14)},IAGA_all{columnIndex(15)},IAGA_all{columnIndex(16)},IAGA_all{columnIndex(17)},IAGA_all{columnIndex(18)});
-    for kk = 1:length(IGRF_DECL_new)
-        fprintf(fid_out,'%10.5f %10.5f %10.5f %10.5f %10.5f %10.5f %10.5f %10.5f %10.5f %10.5f %10.5f %10.5f %10.5f %10.5f %10.5f %10.5f %10.5f %10.5f %10.5f \n',jd2000_vec(kk),IGRF_DECL_new(kk,1),IGRF_DECL_new(kk,2),IGRF_DECL_new(kk,3),IGRF_DECL_new(kk,4),IGRF_DECL_new(kk,5),IGRF_DECL_new(kk,6),IGRF_DECL_new(kk,7),IGRF_DECL_new(kk,8),IGRF_DECL_new(kk,9),IGRF_DECL_new(kk,10),IGRF_DECL_new(kk,11),IGRF_DECL_new(kk,12),IGRF_DECL_new(kk,13),IGRF_DECL_new(kk,14),IGRF_DECL_new(kk,15),IGRF_DECL_new(kk,16),IGRF_DECL_new(kk,17),IGRF_DECL_new(kk,18));
+     fprintf(fid_out,'%s' ,'Time (jd2000) ');
+    for mm = 1:length(columnIndex)
+        fprintf(fid_out,'%s ',IAGA_all{columnIndex(mm)});%,IAGA_all{columnIndex(2)},IAGA_all{columnIndex(3)},IAGA_all{columnIndex(4)},IAGA_all{columnIndex(5)},IAGA_all{columnIndex(6)},IAGA_all{columnIndex(7)},IAGA_all{columnIndex(8)},IAGA_all{columnIndex(9)},IAGA_all{columnIndex(10)},IAGA_all{columnIndex(11)},IAGA_all{columnIndex(12)},IAGA_all{columnIndex(13)},IAGA_all{columnIndex(14)},IAGA_all{columnIndex(15)},IAGA_all{columnIndex(16)},IAGA_all{columnIndex(17)},IAGA_all{columnIndex(18)});
     end
+    fprintf(fid_out,'\n');
+    [rows cols] = size(IGRF_DECL_final);
+    x = repmat('%10.5f\t',1,(cols-1));
+    fprintf(fid_out,[x,'%10.5f\n'],IGRF_DECL_final');
+
     fclose(fid_out);
     
     clear('IGRF_DECL_matrix','IGRF_DECL_new');
@@ -229,15 +257,22 @@ if ~exist(sprintf([path_to_output_files '%s_%s_supermag_SZA.txt'],startTime(1:10
     
     SZA_new = SZA_matrix(:,columnIndex);
     SZA_new(find(SZA_new == 0)) = NaN;
+    
+    SZA_final = horzcat(jd2000_vec,SZA_new);
     % Save data
     
     filename_out = sprintf([path_to_output_files '%s_%s_supermag_SZA.txt'],startTime(1:10),endTime(1:10));
     fid_out = fopen(filename_out,'w');
     
-    fprintf(fid_out,'%s %s %s %s %s %s %s %s %s %s %s %s %s %s %s %s %s %s %s \n','Time (jd2000)',IAGA_all{columnIndex(1)},IAGA_all{columnIndex(2)},IAGA_all{columnIndex(3)},IAGA_all{columnIndex(4)},IAGA_all{columnIndex(5)},IAGA_all{columnIndex(6)},IAGA_all{columnIndex(7)},IAGA_all{columnIndex(8)},IAGA_all{columnIndex(9)},IAGA_all{columnIndex(10)},IAGA_all{columnIndex(11)},IAGA_all{columnIndex(12)},IAGA_all{columnIndex(13)},IAGA_all{columnIndex(14)},IAGA_all{columnIndex(15)},IAGA_all{columnIndex(16)},IAGA_all{columnIndex(17)},IAGA_all{columnIndex(18)});
-    for kk = 1:length(SZA_new)
-        fprintf(fid_out,'%10.5f %10.5f %10.5f %10.5f %10.5f %10.5f %10.5f %10.5f %10.5f %10.5f %10.5f %10.5f %10.5f %10.5f %10.5f %10.5f %10.5f %10.5f %10.5f \n',jd2000_vec(kk),SZA_new(kk,1),SZA_new(kk,2),SZA_new(kk,3),SZA_new(kk,4),SZA_new(kk,5),SZA_new(kk,6),SZA_new(kk,7),SZA_new(kk,8),SZA_new(kk,9),SZA_new(kk,10),SZA_new(kk,11),SZA_new(kk,12),SZA_new(kk,13),SZA_new(kk,14),SZA_new(kk,15),SZA_new(kk,16),SZA_new(kk,17),SZA_new(kk,18));
+     fprintf(fid_out,'%s' ,'Time (jd2000) ');
+    for mm = 1:length(columnIndex)
+        fprintf(fid_out,'%s ',IAGA_all{columnIndex(mm)});%,IAGA_all{columnIndex(2)},IAGA_all{columnIndex(3)},IAGA_all{columnIndex(4)},IAGA_all{columnIndex(5)},IAGA_all{columnIndex(6)},IAGA_all{columnIndex(7)},IAGA_all{columnIndex(8)},IAGA_all{columnIndex(9)},IAGA_all{columnIndex(10)},IAGA_all{columnIndex(11)},IAGA_all{columnIndex(12)},IAGA_all{columnIndex(13)},IAGA_all{columnIndex(14)},IAGA_all{columnIndex(15)},IAGA_all{columnIndex(16)},IAGA_all{columnIndex(17)},IAGA_all{columnIndex(18)});
     end
+    fprintf(fid_out,'\n');
+    [rows cols] = size(SZA_final);
+    x = repmat('%10.5f\t',1,(cols-1));
+    fprintf(fid_out,[x,'%10.5f\n'],SZA_final');
+
     fclose(fid_out);
     
     clear('SZA_matrix','SZA_new');
@@ -269,15 +304,22 @@ if ~exist(sprintf([path_to_output_files '%s_%s_supermag_N.txt'],startTime(1:10),
     
     N_new = N_matrix(:,columnIndex);
     N_new(find(N_new == 0)) = NaN;
+    
+    N_final = horzcat(jd2000_vec,N_new);
     % Save data
     
     filename_out = sprintf([path_to_output_files '%s_%s_supermag_N.txt'],startTime(1:10),endTime(1:10));
     fid_out = fopen(filename_out,'w');
     
-    fprintf(fid_out,'%s %s %s %s %s %s %s %s %s %s %s %s %s %s %s %s %s %s %s \n','Time (jd2000)',IAGA_all{columnIndex(1)},IAGA_all{columnIndex(2)},IAGA_all{columnIndex(3)},IAGA_all{columnIndex(4)},IAGA_all{columnIndex(5)},IAGA_all{columnIndex(6)},IAGA_all{columnIndex(7)},IAGA_all{columnIndex(8)},IAGA_all{columnIndex(9)},IAGA_all{columnIndex(10)},IAGA_all{columnIndex(11)},IAGA_all{columnIndex(12)},IAGA_all{columnIndex(13)},IAGA_all{columnIndex(14)},IAGA_all{columnIndex(15)},IAGA_all{columnIndex(16)},IAGA_all{columnIndex(17)},IAGA_all{columnIndex(18)});
-    for kk = 1:length(N_new)
-        fprintf(fid_out,'%10.5f %10.5f %10.5f %10.5f %10.5f %10.5f %10.5f %10.5f %10.5f %10.5f %10.5f %10.5f %10.5f %10.5f %10.5f %10.5f %10.5f %10.5f %10.5f \n',jd2000_vec(kk),N_new(kk,1),N_new(kk,2),N_new(kk,3),N_new(kk,4),N_new(kk,5),N_new(kk,6),N_new(kk,7),N_new(kk,8),N_new(kk,9),N_new(kk,10),N_new(kk,11),N_new(kk,12),N_new(kk,13),N_new(kk,14),N_new(kk,15),N_new(kk,16),N_new(kk,17),N_new(kk,18));
+     fprintf(fid_out,'%s' ,'Time (jd2000) ');
+    for mm = 1:length(columnIndex)
+        fprintf(fid_out,'%s ',IAGA_all{columnIndex(mm)});%,IAGA_all{columnIndex(2)},IAGA_all{columnIndex(3)},IAGA_all{columnIndex(4)},IAGA_all{columnIndex(5)},IAGA_all{columnIndex(6)},IAGA_all{columnIndex(7)},IAGA_all{columnIndex(8)},IAGA_all{columnIndex(9)},IAGA_all{columnIndex(10)},IAGA_all{columnIndex(11)},IAGA_all{columnIndex(12)},IAGA_all{columnIndex(13)},IAGA_all{columnIndex(14)},IAGA_all{columnIndex(15)},IAGA_all{columnIndex(16)},IAGA_all{columnIndex(17)},IAGA_all{columnIndex(18)});
     end
+    fprintf(fid_out,'\n');
+    [rows cols] = size(N_final);
+    x = repmat('%10.5f\t',1,(cols-1));
+    fprintf(fid_out,[x,'%10.5f\n'],N_final');
+
     fclose(fid_out);
     
     clear('N_matrix','N_new');
@@ -309,15 +351,22 @@ if ~exist(sprintf([path_to_output_files '%s_%s_supermag_E.txt'],startTime(1:10),
     
     E_new = E_matrix(:,columnIndex);
     E_new(find(E_new == 0)) = NaN;
+    
+    E_final = horzcat(jd2000_vec,E_new);
     % Save data
     
     filename_out = sprintf([path_to_output_files '%s_%s_supermag_E.txt'],startTime(1:10),endTime(1:10));
     fid_out = fopen(filename_out,'w');
     
-    fprintf(fid_out,'%s %s %s %s %s %s %s %s %s %s %s %s %s %s %s %s %s %s %s \n','Time (jd2000)',IAGA_all{columnIndex(1)},IAGA_all{columnIndex(2)},IAGA_all{columnIndex(3)},IAGA_all{columnIndex(4)},IAGA_all{columnIndex(5)},IAGA_all{columnIndex(6)},IAGA_all{columnIndex(7)},IAGA_all{columnIndex(8)},IAGA_all{columnIndex(9)},IAGA_all{columnIndex(10)},IAGA_all{columnIndex(11)},IAGA_all{columnIndex(12)},IAGA_all{columnIndex(13)},IAGA_all{columnIndex(14)},IAGA_all{columnIndex(15)},IAGA_all{columnIndex(16)},IAGA_all{columnIndex(17)},IAGA_all{columnIndex(18)});
-    for kk = 1:length(E_new)
-        fprintf(fid_out,'%10.5f %10.5f %10.5f %10.5f %10.5f %10.5f %10.5f %10.5f %10.5f %10.5f %10.5f %10.5f %10.5f %10.5f %10.5f %10.5f %10.5f %10.5f %10.5f \n',jd2000_vec(kk),E_new(kk,1),E_new(kk,2),E_new(kk,3),E_new(kk,4),E_new(kk,5),E_new(kk,6),E_new(kk,7),E_new(kk,8),E_new(kk,9),E_new(kk,10),E_new(kk,11),E_new(kk,12),E_new(kk,13),E_new(kk,14),E_new(kk,15),E_new(kk,16),E_new(kk,17),E_new(kk,18));
+     fprintf(fid_out,'%s' ,'Time (jd2000) ');
+    for mm = 1:length(columnIndex)
+        fprintf(fid_out,'%s ',IAGA_all{columnIndex(mm)});%,IAGA_all{columnIndex(2)},IAGA_all{columnIndex(3)},IAGA_all{columnIndex(4)},IAGA_all{columnIndex(5)},IAGA_all{columnIndex(6)},IAGA_all{columnIndex(7)},IAGA_all{columnIndex(8)},IAGA_all{columnIndex(9)},IAGA_all{columnIndex(10)},IAGA_all{columnIndex(11)},IAGA_all{columnIndex(12)},IAGA_all{columnIndex(13)},IAGA_all{columnIndex(14)},IAGA_all{columnIndex(15)},IAGA_all{columnIndex(16)},IAGA_all{columnIndex(17)},IAGA_all{columnIndex(18)});
     end
+    fprintf(fid_out,'\n');
+    [rows cols] = size(E_final);
+    x = repmat('%10.5f\t',1,(cols-1));
+    fprintf(fid_out,[x,'%10.5f\n'],E_final');
+
     fclose(fid_out);
     
     clear('E_matrix','E_new');
@@ -349,15 +398,22 @@ if ~exist(sprintf([path_to_output_files '%s_%s_supermag_Z.txt'],startTime(1:10),
     
     Z_new = Z_matrix(:,columnIndex);
     Z_new(find(Z_new == 0)) = NaN;
+    
+    Z_final = horzcat(jd2000_vec,Z_new);
     % Save data
     
     filename_out = sprintf([path_to_output_files '%s_%s_supermag_Z.txt'],startTime(1:10),endTime(1:10));
     fid_out = fopen(filename_out,'w');
     
-    fprintf(fid_out,'%s %s %s %s %s %s %s %s %s %s %s %s %s %s %s %s %s %s %s \n','Time (jd2000)',IAGA_all{columnIndex(1)},IAGA_all{columnIndex(2)},IAGA_all{columnIndex(3)},IAGA_all{columnIndex(4)},IAGA_all{columnIndex(5)},IAGA_all{columnIndex(6)},IAGA_all{columnIndex(7)},IAGA_all{columnIndex(8)},IAGA_all{columnIndex(9)},IAGA_all{columnIndex(10)},IAGA_all{columnIndex(11)},IAGA_all{columnIndex(12)},IAGA_all{columnIndex(13)},IAGA_all{columnIndex(14)},IAGA_all{columnIndex(15)},IAGA_all{columnIndex(16)},IAGA_all{columnIndex(17)},IAGA_all{columnIndex(18)});
-    for kk = 1:length(Z_new)
-        fprintf(fid_out,'%10.5f %10.5f %10.5f %10.5f %10.5f %10.5f %10.5f %10.5f %10.5f %10.5f %10.5f %10.5f %10.5f %10.5f %10.5f %10.5f %10.5f %10.5f %10.5f \n',jd2000_vec(kk),Z_new(kk,1),Z_new(kk,2),Z_new(kk,3),Z_new(kk,4),Z_new(kk,5),Z_new(kk,6),Z_new(kk,7),Z_new(kk,8),Z_new(kk,9),Z_new(kk,10),Z_new(kk,11),Z_new(kk,12),Z_new(kk,13),Z_new(kk,14),Z_new(kk,15),Z_new(kk,16),Z_new(kk,17),Z_new(kk,18));
+     fprintf(fid_out,'%s' ,'Time (jd2000) ');
+    for mm = 1:length(columnIndex)
+        fprintf(fid_out,'%s ',IAGA_all{columnIndex(mm)});%,IAGA_all{columnIndex(2)},IAGA_all{columnIndex(3)},IAGA_all{columnIndex(4)},IAGA_all{columnIndex(5)},IAGA_all{columnIndex(6)},IAGA_all{columnIndex(7)},IAGA_all{columnIndex(8)},IAGA_all{columnIndex(9)},IAGA_all{columnIndex(10)},IAGA_all{columnIndex(11)},IAGA_all{columnIndex(12)},IAGA_all{columnIndex(13)},IAGA_all{columnIndex(14)},IAGA_all{columnIndex(15)},IAGA_all{columnIndex(16)},IAGA_all{columnIndex(17)},IAGA_all{columnIndex(18)});
     end
+    fprintf(fid_out,'\n');
+    [rows cols] = size(Z_final);
+    x = repmat('%10.5f\t',1,(cols-1));
+    fprintf(fid_out,[x,'%10.5f\n'],Z_final');
+
     fclose(fid_out);
     
     clear('Z_matrix','Z_new');
@@ -390,15 +446,22 @@ if ~exist(sprintf([path_to_output_files '%s_%s_supermag_B.txt'],startTime(1:10),
     
     B_new = B_matrix(:,columnIndex);
     B_new(find(B_new == 0)) = NaN;
+    
+    B_final = horzcat(jd2000_vec,B_new);
     % Save data
     
     filename_out = sprintf([path_to_output_files '%s_%s_supermag_B.txt'],startTime(1:10),endTime(1:10));
     fid_out = fopen(filename_out,'w');
     
-    fprintf(fid_out,'%s %s %s %s %s %s %s %s %s %s %s %s %s %s %s %s %s %s %s \n','Time (jd2000)',IAGA_all{columnIndex(1)},IAGA_all{columnIndex(2)},IAGA_all{columnIndex(3)},IAGA_all{columnIndex(4)},IAGA_all{columnIndex(5)},IAGA_all{columnIndex(6)},IAGA_all{columnIndex(7)},IAGA_all{columnIndex(8)},IAGA_all{columnIndex(9)},IAGA_all{columnIndex(10)},IAGA_all{columnIndex(11)},IAGA_all{columnIndex(12)},IAGA_all{columnIndex(13)},IAGA_all{columnIndex(14)},IAGA_all{columnIndex(15)},IAGA_all{columnIndex(16)},IAGA_all{columnIndex(17)},IAGA_all{columnIndex(18)});
-    for kk = 1:length(B_new)
-        fprintf(fid_out,'%10.5f %10.5f %10.5f %10.5f %10.5f %10.5f %10.5f %10.5f %10.5f %10.5f %10.5f %10.5f %10.5f %10.5f %10.5f %10.5f %10.5f %10.5f %10.5f \n',jd2000_vec(kk),B_new(kk,1),B_new(kk,2),B_new(kk,3),B_new(kk,4),B_new(kk,5),B_new(kk,6),B_new(kk,7),B_new(kk,8),B_new(kk,9),B_new(kk,10),B_new(kk,11),B_new(kk,12),B_new(kk,13),B_new(kk,14),B_new(kk,15),B_new(kk,16),B_new(kk,17),B_new(kk,18));
+     fprintf(fid_out,'%s' ,'Time (jd2000) ');
+    for mm = 1:length(columnIndex)
+        fprintf(fid_out,'%s ',IAGA_all{columnIndex(mm)});%,IAGA_all{columnIndex(2)},IAGA_all{columnIndex(3)},IAGA_all{columnIndex(4)},IAGA_all{columnIndex(5)},IAGA_all{columnIndex(6)},IAGA_all{columnIndex(7)},IAGA_all{columnIndex(8)},IAGA_all{columnIndex(9)},IAGA_all{columnIndex(10)},IAGA_all{columnIndex(11)},IAGA_all{columnIndex(12)},IAGA_all{columnIndex(13)},IAGA_all{columnIndex(14)},IAGA_all{columnIndex(15)},IAGA_all{columnIndex(16)},IAGA_all{columnIndex(17)},IAGA_all{columnIndex(18)});
     end
+    fprintf(fid_out,'\n');
+    [rows cols] = size(B_final);
+    x = repmat('%10.5f\t',1,(cols-1));
+    fprintf(fid_out,[x,'%10.5f\n'],B_final');
+
     fclose(fid_out);
     
     clear('B_matrix','B_new');
